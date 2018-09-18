@@ -6360,8 +6360,10 @@ definitions:
     properties:
       classes:
         type: "array"
+        items: {}
       categories:
         type: "array"
+        items: {}
     description: "The rental active discounts"
   estimates_insurance:
     properties:
@@ -6427,6 +6429,7 @@ definitions:
         $ref: "#/definitions/estimates_period"
       assemblies:
         type: "array"
+        items: {}
         description: "The rental items"
       discounts:
         $ref: "#/definitions/estimates_discounts"
