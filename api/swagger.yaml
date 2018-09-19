@@ -5,7 +5,7 @@ info:
   version: "2.0.0"
   title: "Hyreslandslaget - HLL API"
 host: "api.hyreslandslaget.se"
-basePath: "/"
+basePath: "/_ah/api/hll/v1/"
 tags:
 - name: "Administration"
   description: "App admin"
@@ -305,10 +305,52 @@ paths:
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Administration"
+  /catalogue/groups:
+    get:
+      tags:
+      - Depots
+      summary: Load All Groups
+      operationId: catalogGroupsGET
+      produces:
+      - application/json
+      responses:
+        200:
+          description: "OK"
+          examples:
+            application/json:
+              items:
+              - code: 1
+                name: Transportmaskiner
+              - code: 2
+                name: Gräv, Last- och Schaktmaskiner
+              - code: 3
+                name: Tillverknings- och sorteringsmaskiner
+              - code: 4
+                name: Beläggnings- och komprimeringsmaskiner
+              - code: 5
+                name: Kraft-, värme och ventilationsanläggningar
+              - code: 6
+                name: Pål-, Spontmaskiner och Pumpar
+              - code: 7
+                name: Lyftanordningar och ställningar
+              - code: 8
+                name: Bearbetningsmaskiner
+              - code: 9
+                name: Övriga byggmaskiner och utrustningar
+          schema:
+            type: "object"
+            required:
+            - "items"
+            properties:
+              items:
+                type: array
+                description: "List of items"
+                items: {}
+      x-swagger-router-controller: Catalog
   /catalogue/groups/{code}:
     get:
       tags:
-      - "Administration"
+      - Depots
       summary: "Load Group"
       description: ""
       operationId: "catalogueGroupsCodeGET"
