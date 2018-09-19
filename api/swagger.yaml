@@ -8,7 +8,9 @@ host: "api.hyreslandslaget.se"
 basePath: "/"
 tags:
 - name: "Administration"
-  description: "Allow to access informations about Depots and Staff."
+  description: "App admin"
+- name: "Depots"
+  description: "HLL Depots (Branches)"
 - name: "Identification"
   description: "The section focus on the identification of device"
 - name: "Estimate"
@@ -23,7 +25,8 @@ schemes:
 paths:
   /update:
     get:
-      tags: []
+      tags:
+      - "Administration"
       summary: "Get the update information"
       description: ""
       operationId: "updateGET"
@@ -58,7 +61,7 @@ paths:
   /depots:
     get:
       tags:
-      - "Administration"
+      - Depots
       summary: "List all available depots"
       description: ""
       operationId: "depotsGET"
@@ -103,7 +106,7 @@ paths:
                   photo: "http://url./niklas.ekwall.png"
           headers: {}
           schema:
-            type: "array"
+            type: array
             items: {}
         404:
           description: "Not Found"
@@ -123,13 +126,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
-                type: "string"
+                type: string
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
         503:
@@ -150,20 +153,20 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
-                type: "string"
+                type: string
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Administration"
   /depots/{code}:
     get:
       tags:
-      - "Administration"
+      - Depots
       summary: "Request single Depo by \"code\" identifier."
       description: ""
       operationId: "depotsCodeGET"
@@ -171,10 +174,10 @@ paths:
       - "application/json"
       parameters:
       - name: "code"
-        in: "path"
+        in: path
         description: "The code of the desired depot."
         required: true
-        type: "string"
+        type: string
         x-example: "2583743adsf0"
       responses:
         200:
@@ -224,27 +227,27 @@ paths:
             - "phones"
             properties:
               code:
-                type: "string"
+                type: string
                 description: "The Depot identifier"
               name:
-                type: "string"
+                type: string
                 description: "The name of Depot"
               description:
-                type: "string"
+                type: string
                 description: "The description of Depot."
               phones:
-                type: "array"
+                type: array
                 items: {}
               email:
-                type: "string"
+                type: string
                 description: "The contact mail of Depot."
               openingHours:
-                type: "array"
+                type: array
                 items: {}
               address:
                 $ref: "#/definitions/inline_response_200_1_address"
               departments:
-                type: "array"
+                type: array
                 description: "The departments in Depot."
                 items: {}
         404:
@@ -265,13 +268,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
-                type: "string"
+                type: string
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
         503:
@@ -292,13 +295,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
-                type: "string"
+                type: string
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Administration"
@@ -313,10 +316,10 @@ paths:
       - "application/json"
       parameters:
       - name: "code"
-        in: "path"
+        in: path
         description: "The group code"
         required: true
-        type: "string"
+        type: string
         x-example: "20"
       responses:
         200:
@@ -333,7 +336,7 @@ paths:
             - "items"
             properties:
               items:
-                type: "array"
+                type: array
                 description: "List of items"
                 items: {}
       x-swagger-router-controller: "Administration"
@@ -351,7 +354,7 @@ paths:
         in: "query"
         description: "The category code"
         required: true
-        type: "string"
+        type: string
         x-example: "20"
       responses:
         200:
@@ -411,7 +414,7 @@ paths:
             - "items"
             properties:
               items:
-                type: "array"
+                type: array
                 description: "List of items"
                 items: {}
       x-swagger-router-controller: "Administration"
@@ -426,7 +429,7 @@ paths:
       - "application/json"
       parameters:
       - name: "number"
-        in: "path"
+        in: path
         required: true
         type: "integer"
       responses:
@@ -489,7 +492,7 @@ paths:
               equipment:
                 $ref: "#/definitions/inline_response_200_3_equipment"
               accessories:
-                type: "array"
+                type: array
                 description: "Accessories related to equipment."
                 items: {}
       x-swagger-router-controller: "Administration"
@@ -516,7 +519,7 @@ paths:
             - "token"
             properties:
               token:
-                type: "string"
+                type: string
                 description: "The unique device identification token"
       x-swagger-router-controller: "Identification"
     post:
@@ -532,7 +535,7 @@ paths:
         name: "token"
         required: true
         schema:
-          type: "string"
+          type: string
       responses:
         200:
           description: "OK"
@@ -546,7 +549,7 @@ paths:
             - "token"
             properties:
               token:
-                type: "string"
+                type: string
                 description: "The unique device identification token"
         404:
           description: "Not Found"
@@ -566,13 +569,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
-                type: "string"
+                type: string
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
         409:
@@ -593,13 +596,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
-                type: "string"
+                type: string
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Identification"
@@ -616,7 +619,7 @@ paths:
         name: "token"
         required: true
         schema:
-          type: "string"
+          type: string
       responses:
         200:
           description: "OK"
@@ -630,7 +633,7 @@ paths:
             - "token"
             properties:
               token:
-                type: "string"
+                type: string
                 description: "The unique device identification token"
         404:
           description: "Not Found"
@@ -650,13 +653,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
-                type: "string"
+                type: string
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Identification"
@@ -708,7 +711,7 @@ paths:
             type: "object"
             properties:
               items:
-                type: "array"
+                type: array
                 items: {}
         403:
           description: "Forbidden"
@@ -728,13 +731,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
         404:
@@ -755,13 +758,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Identification"
@@ -868,7 +871,7 @@ paths:
             type: "object"
             properties:
               items:
-                type: "array"
+                type: array
                 items: {}
         403:
           description: "Forbidden"
@@ -888,13 +891,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
         404:
@@ -915,13 +918,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Estimate"
@@ -938,7 +941,7 @@ paths:
         in: "query"
         description: "The ID of the template to base the new estimate on"
         required: false
-        type: "string"
+        type: string
         x-example: "AS3423"
       - in: "body"
         name: "body"
@@ -1037,24 +1040,24 @@ paths:
             type: "object"
             properties:
               id:
-                type: "string"
+                type: string
                 description: "The unique identifier"
               name:
-                type: "string"
+                type: string
                 description: "The name of estimate"
               color:
-                type: "string"
+                type: string
                 description: "The color of the estimate"
               price:
-                type: "string"
+                type: string
                 description: "The total productPrice"
               modified:
-                type: "string"
+                type: string
                 description: "ISO 8601 The last modified date"
               period:
                 $ref: "#/definitions/estimates_period"
               assemblies:
-                type: "array"
+                type: array
                 description: "The rental items"
                 items: {}
               discounts:
@@ -1081,13 +1084,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
         404:
@@ -1108,13 +1111,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Estimate"
@@ -1127,7 +1130,15 @@ paths:
       operationId: "estimatesIdGET"
       produces:
       - "application/json"
-      parameters: []
+      parameters:
+      - in: path
+        name: "id"
+        required: true
+        type: string
+      - in: query
+        name: "type"
+        required: false
+        type: string
       responses:
         200:
           description: "OK"
@@ -1220,24 +1231,24 @@ paths:
             type: "object"
             properties:
               id:
-                type: "string"
+                type: string
                 description: "The unique identifier"
               name:
-                type: "string"
+                type: string
                 description: "The name of estimate"
               color:
-                type: "string"
+                type: string
                 description: "The color of the estimate"
               price:
-                type: "string"
+                type: string
                 description: "The total productPrice"
               modified:
-                type: "string"
+                type: string
                 description: "ISO 8601 The last modified date"
               period:
                 $ref: "#/definitions/estimates_period"
               assemblies:
-                type: "array"
+                type: array
                 description: "The rental items"
                 items: {}
               discounts:
@@ -1264,13 +1275,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
         404:
@@ -1291,13 +1302,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Estimate"
@@ -1309,7 +1320,11 @@ paths:
       operationId: "estimatesIdDELETE"
       produces:
       - "application/json"
-      parameters: []
+      parameters:
+      - in: path
+        name: "id"
+        required: true
+        type: string
       responses:
         204:
           description: "No Content"
@@ -1333,13 +1348,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
         404:
@@ -1360,85 +1375,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
-                description: "Array of errors."
-                items: {}
-      x-swagger-router-controller: "Estimate"
-  /estimates/{id}?type=pdf:
-    get:
-      tags:
-      - "Estimate"
-      summary: "Get estimate as PDF"
-      description: ""
-      operationId: "estimatesIdtypepdfGET"
-      produces:
-      - "application/pdf"
-      - "application/json"
-      parameters: []
-      responses:
-        200:
-          description: "OK"
-          examples:
-            application/pdf: ""
-          headers: {}
-        403:
-          description: "Forbidden"
-          examples:
-            application/json:
-              message: "Resource not allowed"
-              code: 403
-              errors:
-              - domain: "global"
-                reason: "backendError"
-                message: "Error message"
-          headers: {}
-          schema:
-            type: "object"
-            required:
-            - "code"
-            - "message"
-            properties:
-              message:
-                type: "string"
-                description: "The meessage of Error."
-              code:
-                type: "number"
-                description: "The error code."
-              errors:
-                type: "array"
-                description: "Array of errors."
-                items: {}
-        404:
-          description: "Not Found"
-          examples:
-            application/json:
-              message: "Resource not found"
-              code: 404
-              errors:
-              - domain: "global"
-                reason: "backendError"
-                message: "Error message"
-          headers: {}
-          schema:
-            type: "object"
-            required:
-            - "code"
-            - "message"
-            properties:
-              message:
-                type: "string"
-                description: "The meessage of Error."
-              code:
-                type: "number"
-                description: "The error code."
-              errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Estimate"
@@ -1452,9 +1395,12 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        required: false
+      - in: path
+        name: "id"
+        required: true
+        type: string
+      - in: body
+        name: estimate
         schema:
           $ref: "#/definitions/Estimate Characteristic"
       responses:
@@ -1472,19 +1418,19 @@ paths:
             type: "object"
             properties:
               id:
-                type: "string"
+                type: string
                 description: "The unique identifier"
               name:
-                type: "string"
+                type: string
                 description: "The name of estimate"
               color:
-                type: "string"
+                type: string
                 description: "The color of the estimate"
               price:
-                type: "string"
+                type: string
                 description: "The total productPrice"
               modified:
-                type: "string"
+                type: string
                 description: "ISO 8601 The last modified date"
         403:
           description: "Forbidden"
@@ -1504,13 +1450,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
         404:
@@ -1531,13 +1477,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Estimate"
@@ -1552,10 +1498,10 @@ paths:
       - "application/json"
       parameters:
       - name: "estimateId"
-        in: "path"
+        in: path
         description: "The id of estimate."
         required: true
-        type: "string"
+        type: string
         x-example: "987134-o87sdf"
       - in: "body"
         name: "body"
@@ -1654,24 +1600,24 @@ paths:
             type: "object"
             properties:
               id:
-                type: "string"
+                type: string
                 description: "The unique identifier"
               name:
-                type: "string"
+                type: string
                 description: "The name of estimate"
               color:
-                type: "string"
+                type: string
                 description: "The color of the estimate"
               price:
-                type: "string"
+                type: string
                 description: "The total productPrice"
               modified:
-                type: "string"
+                type: string
                 description: "ISO 8601 The last modified date"
               period:
                 $ref: "#/definitions/estimates_period"
               assemblies:
-                type: "array"
+                type: array
                 description: "The rental items"
                 items: {}
               discounts:
@@ -1698,13 +1644,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
         404:
@@ -1725,13 +1671,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Estimate"
@@ -1746,10 +1692,10 @@ paths:
       - "application/json"
       parameters:
       - name: "id"
-        in: "path"
+        in: path
         description: "The id of estimate."
         required: true
-        type: "string"
+        type: string
         x-example: "987134-o87sdf"
       - in: "body"
         name: "body"
@@ -1848,24 +1794,24 @@ paths:
             type: "object"
             properties:
               id:
-                type: "string"
+                type: string
                 description: "The unique identifier"
               name:
-                type: "string"
+                type: string
                 description: "The name of estimate"
               color:
-                type: "string"
+                type: string
                 description: "The color of the estimate"
               price:
-                type: "string"
+                type: string
                 description: "The total productPrice"
               modified:
-                type: "string"
+                type: string
                 description: "ISO 8601 The last modified date"
               period:
                 $ref: "#/definitions/estimates_period"
               assemblies:
-                type: "array"
+                type: array
                 description: "The rental items"
                 items: {}
               discounts:
@@ -1892,13 +1838,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
         404:
@@ -1919,13 +1865,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Estimate"
@@ -1940,10 +1886,10 @@ paths:
       - "application/json"
       parameters:
       - name: "id"
-        in: "path"
+        in: path
         description: "The id of estimate."
         required: true
-        type: "string"
+        type: string
         x-example: "987134-o87sdf"
       responses:
         200:
@@ -2037,24 +1983,24 @@ paths:
             type: "object"
             properties:
               id:
-                type: "string"
+                type: string
                 description: "The unique identifier"
               name:
-                type: "string"
+                type: string
                 description: "The name of estimate"
               color:
-                type: "string"
+                type: string
                 description: "The color of the estimate"
               price:
-                type: "string"
+                type: string
                 description: "The total productPrice"
               modified:
-                type: "string"
+                type: string
                 description: "ISO 8601 The last modified date"
               period:
                 $ref: "#/definitions/estimates_period"
               assemblies:
-                type: "array"
+                type: array
                 description: "The rental items"
                 items: {}
               discounts:
@@ -2081,13 +2027,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
         404:
@@ -2108,13 +2054,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Estimate"
@@ -2128,10 +2074,10 @@ paths:
       - "application/json"
       parameters:
       - name: "id"
-        in: "path"
+        in: path
         description: "The id of estimate."
         required: true
-        type: "string"
+        type: string
         x-example: "987134-o87sdf"
       responses:
         200:
@@ -2225,24 +2171,24 @@ paths:
             type: "object"
             properties:
               id:
-                type: "string"
+                type: string
                 description: "The unique identifier"
               name:
-                type: "string"
+                type: string
                 description: "The name of estimate"
               color:
-                type: "string"
+                type: string
                 description: "The color of the estimate"
               price:
-                type: "string"
+                type: string
                 description: "The total productPrice"
               modified:
-                type: "string"
+                type: string
                 description: "ISO 8601 The last modified date"
               period:
                 $ref: "#/definitions/estimates_period"
               assemblies:
-                type: "array"
+                type: array
                 description: "The rental items"
                 items: {}
               discounts:
@@ -2269,13 +2215,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
         404:
@@ -2296,13 +2242,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Estimate"
@@ -2317,10 +2263,10 @@ paths:
       - "application/json"
       parameters:
       - name: "id"
-        in: "path"
+        in: path
         description: "The id of estimate."
         required: true
-        type: "string"
+        type: string
         x-example: "987134-o87sdf"
       - in: "body"
         name: "body"
@@ -2419,24 +2365,24 @@ paths:
             type: "object"
             properties:
               id:
-                type: "string"
+                type: string
                 description: "The unique identifier"
               name:
-                type: "string"
+                type: string
                 description: "The name of estimate"
               color:
-                type: "string"
+                type: string
                 description: "The color of the estimate"
               price:
-                type: "string"
+                type: string
                 description: "The total productPrice"
               modified:
-                type: "string"
+                type: string
                 description: "ISO 8601 The last modified date"
               period:
                 $ref: "#/definitions/estimates_period"
               assemblies:
-                type: "array"
+                type: array
                 description: "The rental items"
                 items: {}
               discounts:
@@ -2463,13 +2409,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
         404:
@@ -2490,13 +2436,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Estimate"
@@ -2510,10 +2456,10 @@ paths:
       - "application/json"
       parameters:
       - name: "id"
-        in: "path"
+        in: path
         description: "The id of estimate."
         required: true
-        type: "string"
+        type: string
         x-example: "987134-o87sdf"
       responses:
         200:
@@ -2607,24 +2553,24 @@ paths:
             type: "object"
             properties:
               id:
-                type: "string"
+                type: string
                 description: "The unique identifier"
               name:
-                type: "string"
+                type: string
                 description: "The name of estimate"
               color:
-                type: "string"
+                type: string
                 description: "The color of the estimate"
               price:
-                type: "string"
+                type: string
                 description: "The total productPrice"
               modified:
-                type: "string"
+                type: string
                 description: "ISO 8601 The last modified date"
               period:
                 $ref: "#/definitions/estimates_period"
               assemblies:
-                type: "array"
+                type: array
                 description: "The rental items"
                 items: {}
               discounts:
@@ -2651,13 +2597,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
         404:
@@ -2678,17 +2624,24 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Estimate"
   /estimates/{estimateId}/assemblies:
+    parameters:
+    - name: "estimateId"
+      in: path
+      description: "The id of estimate."
+      required: true
+      type: string
+      x-example: "987134-o87sdf"
     get:
       tags:
       - "Estimate"
@@ -2697,13 +2650,6 @@ paths:
       operationId: "estimatesEstimateIdAssembliesGET"
       produces:
       - "application/json"
-      parameters:
-      - name: "estimateId"
-        in: "path"
-        description: "The id of estimate."
-        required: true
-        type: "string"
-        x-example: "987134-o87sdf"
       responses:
         200:
           description: "OK"
@@ -2769,7 +2715,7 @@ paths:
             type: "object"
             properties:
               items:
-                type: "array"
+                type: array
                 items: {}
         403:
           description: "Forbidden"
@@ -2789,13 +2735,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
         404:
@@ -2816,13 +2762,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Estimate"
@@ -2837,10 +2783,10 @@ paths:
       - "application/json"
       parameters:
       - name: "estimateId"
-        in: "path"
+        in: path
         description: "The id of estimate"
         required: true
-        type: "string"
+        type: string
         x-example: "987134-o87sdf"
       - in: "body"
         name: "body"
@@ -2939,24 +2885,24 @@ paths:
             type: "object"
             properties:
               id:
-                type: "string"
+                type: string
                 description: "The unique identifier"
               name:
-                type: "string"
+                type: string
                 description: "The name of estimate"
               color:
-                type: "string"
+                type: string
                 description: "The color of the estimate"
               price:
-                type: "string"
+                type: string
                 description: "The total productPrice"
               modified:
-                type: "string"
+                type: string
                 description: "ISO 8601 The last modified date"
               period:
                 $ref: "#/definitions/estimates_period"
               assemblies:
-                type: "array"
+                type: array
                 description: "The rental items"
                 items: {}
               discounts:
@@ -2983,13 +2929,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
         404:
@@ -3010,13 +2956,200 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
+                description: "Array of errors."
+                items: {}
+      x-swagger-router-controller: "Estimate"
+    put:
+      tags:
+      - "Estimate"
+      summary: "Bulk update of assemblies amounts"
+      description: "Allows to update group of assemblies amounts with single request."
+      operationId: "estimatesIdAssembliesPUT"
+      produces:
+      - "application/json"
+      parameters:
+      - in: body
+        name: "body"
+        required: false
+        schema:
+          $ref: "#/definitions/Estimate Assemblies"
+      responses:
+        200:
+          description: "OK"
+          examples:
+            application/json:
+              id: "AS3423"
+              name: "Name"
+              color: "#ff0055"
+              price: "800 kr"
+              modified: "2017-01-12T15:46:58Z"
+              period:
+                start: "2017-01-12T15:46:58Z"
+                finish: "2017-01-12T15:46:58Z"
+              assemblies:
+              - id: 123
+                equipment:
+                  article:
+                    number: "1234567890"
+                    name: "The Dumper"
+                    description: "Lorem imposum"
+                    sraCode: "211313"
+                  offer:
+                    name: "\"Hyra\""
+                    amount: "123.45"
+                    price: "12345 kr / alldager"
+                    unit: "st"
+                  services:
+                    article:
+                      number: "1234567890"
+                      name: "The Dumper"
+                      description: "Lorem imposum"
+                      sraCode: "211313"
+                    offer:
+                      name: "\"Hyra\""
+                      amount: "123.45"
+                      price: "12345 kr / alldager"
+                      unit: "st"
+                  order:
+                    amount: 1234.55999999999994543031789362430572509765625
+                    discount: 123
+                    price: "1234567.89 kr"
+                accessories:
+                - article:
+                    number: "1234567890"
+                    name: "The Dumper"
+                    description: "Lorem imposum"
+                    sraCode: "211313"
+                  offer:
+                    name: "\"Hyra\""
+                    amount: "123.45"
+                    price: "12345 kr / alldager"
+                    unit: "st"
+                    preSelected: true
+                  services:
+                    article:
+                      number: "1234567890"
+                      name: "The Dumper"
+                      description: "Lorem imposum"
+                      sraCode: "211313"
+                    offer:
+                      name: "\"Hyra\""
+                      amount: "123.45"
+                      price: "12345 kr / alldager"
+                      unit: "st"
+                  order:
+                    amount: 1234.55999999999994543031789362430572509765625
+                    discount: 123
+                    price: "1234567.89 kr"
+              discounts:
+                classes:
+                - code: "23"
+                  name: "Some name"
+                  value: 10
+                categories:
+                - code: "23"
+                  name: "Some name"
+                  value: 10
+              insurance:
+                price: "150 kr"
+              delivery:
+                destination:
+                  latitude: "57.56236"
+                  longitude: "18.34526"
+                fare:
+                  price: "150 kr"
+                status: "ESTIMATED"
+                message: "A description of the status"
+          headers: {}
+          schema:
+            type: "object"
+            properties:
+              id:
+                type: string
+                description: "The unique identifier"
+              name:
+                type: string
+                description: "The name of estimate"
+              color:
+                type: string
+                description: "The color of the estimate"
+              price:
+                type: string
+                description: "The total productPrice"
+              modified:
+                type: string
+                description: "ISO 8601 The last modified date"
+              period:
+                $ref: "#/definitions/estimates_period"
+              assemblies:
+                type: array
+                description: "The rental items"
+                items: {}
+              discounts:
+                $ref: "#/definitions/inline_response_200_6_discounts"
+              insurance:
+                $ref: "#/definitions/estimates_insurance"
+              delivery:
+                $ref: "#/definitions/estimates_delivery"
+        403:
+          description: "Forbidden"
+          examples:
+            application/json:
+              message: "Resource not allowed"
+              code: 403
+              errors:
+              - domain: "global"
+                reason: "backendError"
+                message: "Error message"
+          headers: {}
+          schema:
+            type: "object"
+            required:
+            - "code"
+            - "message"
+            properties:
+              message:
+                type: string
+                description: "The meessage of Error."
+              code:
+                type: "number"
+                description: "The error code."
+              errors:
+                type: array
+                description: "Array of errors."
+                items: {}
+        404:
+          description: "Not Found"
+          examples:
+            application/json:
+              message: "Resource not found"
+              code: 404
+              errors:
+              - domain: "global"
+                reason: "backendError"
+                message: "Error message"
+          headers: {}
+          schema:
+            type: "object"
+            required:
+            - "code"
+            - "message"
+            properties:
+              message:
+                type: string
+                description: "The meessage of Error."
+              code:
+                type: "number"
+                description: "The error code."
+              errors:
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Estimate"
@@ -3031,16 +3164,16 @@ paths:
       - "application/json"
       parameters:
       - name: "estimateId"
-        in: "path"
+        in: path
         description: "The id of estimate."
         required: true
-        type: "string"
+        type: string
         x-example: "987134-o87sdf"
       - name: "assemblyId"
-        in: "path"
+        in: path
         description: "The id for the equipment"
         required: true
-        type: "string"
+        type: string
         x-example: "6498431"
       responses:
         200:
@@ -3111,7 +3244,7 @@ paths:
               equipment:
                 $ref: "#/definitions/inline_response_200_8_equipment"
               accessories:
-                type: "array"
+                type: array
                 description: "The accessories in this estimate"
                 items: {}
         403:
@@ -3132,13 +3265,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
         404:
@@ -3159,13 +3292,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Estimate"
@@ -3180,16 +3313,16 @@ paths:
       - "application/json"
       parameters:
       - name: "estimateId"
-        in: "path"
+        in: path
         description: "The id of estimate."
         required: true
-        type: "string"
+        type: string
         x-example: "987134-o87sdf"
       - name: "assemblyId"
-        in: "path"
+        in: path
         description: "The id for the equipment"
         required: true
-        type: "string"
+        type: string
         x-example: "6498431"
       - in: "body"
         name: "body"
@@ -3288,24 +3421,24 @@ paths:
             type: "object"
             properties:
               id:
-                type: "string"
+                type: string
                 description: "The unique identifier"
               name:
-                type: "string"
+                type: string
                 description: "The name of estimate"
               color:
-                type: "string"
+                type: string
                 description: "The color of the estimate"
               price:
-                type: "string"
+                type: string
                 description: "The total productPrice"
               modified:
-                type: "string"
+                type: string
                 description: "ISO 8601 The last modified date"
               period:
                 $ref: "#/definitions/estimates_period"
               assemblies:
-                type: "array"
+                type: array
                 description: "The rental items"
                 items: {}
               discounts:
@@ -3332,13 +3465,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
         404:
@@ -3359,13 +3492,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Estimate"
@@ -3379,16 +3512,16 @@ paths:
       - "application/json"
       parameters:
       - name: "estimateId"
-        in: "path"
+        in: path
         description: "The id of estimate."
         required: true
-        type: "string"
+        type: string
         x-example: "987134-o87sdf"
       - name: "assemblyId"
-        in: "path"
+        in: path
         description: "The id for the equipment"
         required: true
-        type: "string"
+        type: string
         x-example: "6498431"
       - in: "body"
         name: "body"
@@ -3487,24 +3620,24 @@ paths:
             type: "object"
             properties:
               id:
-                type: "string"
+                type: string
                 description: "The unique identifier"
               name:
-                type: "string"
+                type: string
                 description: "The name of estimate"
               color:
-                type: "string"
+                type: string
                 description: "The color of the estimate"
               price:
-                type: "string"
+                type: string
                 description: "The total productPrice"
               modified:
-                type: "string"
+                type: string
                 description: "ISO 8601 The last modified date"
               period:
                 $ref: "#/definitions/estimates_period"
               assemblies:
-                type: "array"
+                type: array
                 description: "The rental items"
                 items: {}
               discounts:
@@ -3531,13 +3664,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
         404:
@@ -3558,13 +3691,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Estimate"
@@ -3579,22 +3712,22 @@ paths:
       - "application/json"
       parameters:
       - name: "estimateId"
-        in: "path"
+        in: path
         description: "The id of estimate."
         required: true
-        type: "string"
+        type: string
         x-example: "987134-o87sdf"
       - name: "assemblyId"
-        in: "path"
+        in: path
         description: "The id for the equipment"
         required: true
-        type: "string"
+        type: string
         x-example: "6498431"
       - name: "articleNumber"
-        in: "path"
+        in: path
         description: "The article number of accessory."
         required: true
-        type: "string"
+        type: string
         x-example: "6493871"
       - in: "body"
         name: "body"
@@ -3693,24 +3826,24 @@ paths:
             type: "object"
             properties:
               id:
-                type: "string"
+                type: string
                 description: "The unique identifier"
               name:
-                type: "string"
+                type: string
                 description: "The name of estimate"
               color:
-                type: "string"
+                type: string
                 description: "The color of the estimate"
               price:
-                type: "string"
+                type: string
                 description: "The total productPrice"
               modified:
-                type: "string"
+                type: string
                 description: "ISO 8601 The last modified date"
               period:
                 $ref: "#/definitions/estimates_period"
               assemblies:
-                type: "array"
+                type: array
                 description: "The rental items"
                 items: {}
               discounts:
@@ -3737,13 +3870,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
         404:
@@ -3764,201 +3897,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
-                description: "Array of errors."
-                items: {}
-      x-swagger-router-controller: "Estimate"
-  /estimates/{id}/assemblies:
-    put:
-      tags:
-      - "Estimate"
-      summary: "Bulk update of assemblies amounts"
-      description: "Allows to update group of assemblies amounts with single request."
-      operationId: "estimatesIdAssembliesPUT"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        required: false
-        schema:
-          $ref: "#/definitions/Estimate Assemblies"
-      responses:
-        200:
-          description: "OK"
-          examples:
-            application/json:
-              id: "AS3423"
-              name: "Name"
-              color: "#ff0055"
-              price: "800 kr"
-              modified: "2017-01-12T15:46:58Z"
-              period:
-                start: "2017-01-12T15:46:58Z"
-                finish: "2017-01-12T15:46:58Z"
-              assemblies:
-              - id: 123
-                equipment:
-                  article:
-                    number: "1234567890"
-                    name: "The Dumper"
-                    description: "Lorem imposum"
-                    sraCode: "211313"
-                  offer:
-                    name: "\"Hyra\""
-                    amount: "123.45"
-                    price: "12345 kr / alldager"
-                    unit: "st"
-                  services:
-                    article:
-                      number: "1234567890"
-                      name: "The Dumper"
-                      description: "Lorem imposum"
-                      sraCode: "211313"
-                    offer:
-                      name: "\"Hyra\""
-                      amount: "123.45"
-                      price: "12345 kr / alldager"
-                      unit: "st"
-                  order:
-                    amount: 1234.55999999999994543031789362430572509765625
-                    discount: 123
-                    price: "1234567.89 kr"
-                accessories:
-                - article:
-                    number: "1234567890"
-                    name: "The Dumper"
-                    description: "Lorem imposum"
-                    sraCode: "211313"
-                  offer:
-                    name: "\"Hyra\""
-                    amount: "123.45"
-                    price: "12345 kr / alldager"
-                    unit: "st"
-                    preSelected: true
-                  services:
-                    article:
-                      number: "1234567890"
-                      name: "The Dumper"
-                      description: "Lorem imposum"
-                      sraCode: "211313"
-                    offer:
-                      name: "\"Hyra\""
-                      amount: "123.45"
-                      price: "12345 kr / alldager"
-                      unit: "st"
-                  order:
-                    amount: 1234.55999999999994543031789362430572509765625
-                    discount: 123
-                    price: "1234567.89 kr"
-              discounts:
-                classes:
-                - code: "23"
-                  name: "Some name"
-                  value: 10
-                categories:
-                - code: "23"
-                  name: "Some name"
-                  value: 10
-              insurance:
-                price: "150 kr"
-              delivery:
-                destination:
-                  latitude: "57.56236"
-                  longitude: "18.34526"
-                fare:
-                  price: "150 kr"
-                status: "ESTIMATED"
-                message: "A description of the status"
-          headers: {}
-          schema:
-            type: "object"
-            properties:
-              id:
-                type: "string"
-                description: "The unique identifier"
-              name:
-                type: "string"
-                description: "The name of estimate"
-              color:
-                type: "string"
-                description: "The color of the estimate"
-              price:
-                type: "string"
-                description: "The total productPrice"
-              modified:
-                type: "string"
-                description: "ISO 8601 The last modified date"
-              period:
-                $ref: "#/definitions/estimates_period"
-              assemblies:
-                type: "array"
-                description: "The rental items"
-                items: {}
-              discounts:
-                $ref: "#/definitions/inline_response_200_6_discounts"
-              insurance:
-                $ref: "#/definitions/estimates_insurance"
-              delivery:
-                $ref: "#/definitions/estimates_delivery"
-        403:
-          description: "Forbidden"
-          examples:
-            application/json:
-              message: "Resource not allowed"
-              code: 403
-              errors:
-              - domain: "global"
-                reason: "backendError"
-                message: "Error message"
-          headers: {}
-          schema:
-            type: "object"
-            required:
-            - "code"
-            - "message"
-            properties:
-              message:
-                type: "string"
-                description: "The meessage of Error."
-              code:
-                type: "number"
-                description: "The error code."
-              errors:
-                type: "array"
-                description: "Array of errors."
-                items: {}
-        404:
-          description: "Not Found"
-          examples:
-            application/json:
-              message: "Resource not found"
-              code: 404
-              errors:
-              - domain: "global"
-                reason: "backendError"
-                message: "Error message"
-          headers: {}
-          schema:
-            type: "object"
-            required:
-            - "code"
-            - "message"
-            properties:
-              message:
-                type: "string"
-                description: "The meessage of Error."
-              code:
-                type: "number"
-                description: "The error code."
-              errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Estimate"
@@ -3976,13 +3921,13 @@ paths:
         in: "query"
         description: "The query"
         required: true
-        type: "string"
+        type: string
         x-example: "Truck"
       - name: "type"
         in: "query"
         description: "The type of domain to where search should be perform."
         required: false
-        type: "string"
+        type: string
         enum:
         - "equipment"
         - "category"
@@ -3992,13 +3937,13 @@ paths:
         in: "query"
         description: "The limit for search results."
         required: false
-        type: "string"
+        type: string
         x-example: "10"
       - name: "offset"
         in: "query"
         description: "The offset for search results."
         required: false
-        type: "string"
+        type: string
         x-example: "10"
       responses:
         200:
@@ -4022,7 +3967,7 @@ paths:
             - "items"
             properties:
               items:
-                type: "array"
+                type: array
                 description: "The different search result sections, Equipment, Depot\
                   \ etc"
                 items: {}
@@ -4044,13 +3989,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
         404:
@@ -4071,13 +4016,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Search"
@@ -5179,7 +5124,7 @@ paths:
             type: "object"
             properties:
               items:
-                type: "array"
+                type: array
                 items: {}
         401:
           description: "Unauthorized"
@@ -5199,13 +5144,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Overview"
@@ -5242,7 +5187,7 @@ paths:
                 type: "number"
                 description: "The resrouce ID"
               name:
-                type: "string"
+                type: string
                 description: "The item display name."
         400:
           description: "Bad Request"
@@ -5262,13 +5207,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
         401:
@@ -5289,13 +5234,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Overview"
@@ -5319,7 +5264,7 @@ paths:
               accessCode: "123456"
           headers: {}
           schema:
-            type: "array"
+            type: array
             items: {}
       x-swagger-router-controller: "Overview"
   /projects/{projectId}/actions/bookReturn:
@@ -5332,7 +5277,11 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - in: "body"
+      - in: path
+        name: projectId
+        required: true
+        type: string
+      - in: body
         name: "body"
         required: false
         schema:
@@ -5360,13 +5309,13 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
         401:
@@ -5387,16 +5336,17 @@ paths:
             - "message"
             properties:
               message:
-                type: "string"
+                type: string
                 description: "The meessage of Error."
               code:
                 type: "number"
                 description: "The error code."
               errors:
-                type: "array"
+                type: array
                 description: "Array of errors."
                 items: {}
       x-swagger-router-controller: "Project"
+
 definitions:
   Force update: {}
   Depots: {}
@@ -5429,7 +5379,7 @@ definitions:
       latestVersion:
         type: "number"
       storeUrl:
-        type: "string"
+        type: string
   IOS:
     type: "object"
     required:
@@ -5438,11 +5388,11 @@ definitions:
     - "storeUrl"
     properties:
       minVersion:
-        type: "string"
+        type: string
       latestVersion:
-        type: "string"
+        type: string
       storeUrl:
-        type: "string"
+        type: string
   Administration Data Structures:
     type: "object"
   Employee Base:
@@ -5455,18 +5405,18 @@ definitions:
     - "photo"
     properties:
       location:
-        type: "string"
+        type: string
       firstName:
-        type: "string"
+        type: string
       lastName:
-        type: "string"
+        type: string
       phones:
-        type: "array"
+        type: array
         items: {}
       email:
-        type: "string"
+        type: string
       photo:
-        type: "string"
+        type: string
   Department Base:
     type: "object"
     required:
@@ -5474,9 +5424,9 @@ definitions:
     - "name"
     properties:
       name:
-        type: "string"
+        type: string
       employees:
-        type: "array"
+        type: array
         items: {}
   PhoneNumber Base:
     type: "object"
@@ -5485,9 +5435,9 @@ definitions:
     - "type"
     properties:
       number:
-        type: "string"
+        type: string
       type:
-        type: "string"
+        type: string
   Address Base:
     type: "object"
     required:
@@ -5498,15 +5448,15 @@ definitions:
     - "streetAddress"
     properties:
       streetAddress:
-        type: "string"
+        type: string
       postalCode:
-        type: "string"
+        type: string
       city:
-        type: "string"
+        type: string
       country:
-        type: "string"
+        type: string
       region:
-        type: "string"
+        type: string
   Depot Base:
     type: "object"
     required:
@@ -5517,29 +5467,29 @@ definitions:
     - "phones"
     properties:
       code:
-        type: "string"
+        type: string
       name:
-        type: "string"
+        type: string
       description:
-        type: "string"
+        type: string
       phones:
-        type: "array"
+        type: array
         items: {}
       email:
-        type: "string"
+        type: string
       openingHours:
-        type: "array"
+        type: array
         items: {}
       departments:
-        type: "array"
+        type: array
         items: {}
   Opening Hours Base:
     type: "object"
     properties:
       name:
-        type: "string"
+        type: string
       openingHours:
-        type: "string"
+        type: string
   Location Base:
     type: "object"
     required:
@@ -5547,9 +5497,9 @@ definitions:
     - "longitude"
     properties:
       latitude:
-        type: "string"
+        type: string
       longitude:
-        type: "string"
+        type: string
     example:
       latitude: "latitude"
       longitude: "longitude"
@@ -5561,14 +5511,14 @@ definitions:
     - "token"
     properties:
       token:
-        type: "string"
+        type: string
   ApiUserData:
     type: "object"
     required:
     - "token"
     properties:
       token:
-        type: "string"
+        type: string
   Catalog Data Structures:
     type: "object"
   Catalogue Group Base:
@@ -5578,16 +5528,16 @@ definitions:
     - "name"
     properties:
       code:
-        type: "string"
+        type: string
       name:
-        type: "string"
+        type: string
   Catalogue Group Items:
     type: "object"
     required:
     - "items"
     properties:
       items:
-        type: "array"
+        type: array
         items: {}
   Catalogue Assembly Base:
     $ref: "#/definitions/BilOfMaterial Base"
@@ -5597,7 +5547,7 @@ definitions:
     - "items"
     properties:
       items:
-        type: "array"
+        type: array
         items: {}
   Sales Data Structures:
     type: "object"
@@ -5605,7 +5555,7 @@ definitions:
     type: "object"
     properties:
       accessories:
-        type: "array"
+        type: array
         items: {}
     example:
       accessories:
@@ -5615,7 +5565,7 @@ definitions:
     type: "object"
     properties:
       accessories:
-        type: "array"
+        type: array
         items: {}
     example:
       accessories:
@@ -5628,7 +5578,7 @@ definitions:
     - "number"
     properties:
       number:
-        type: "string"
+        type: string
       amount:
         type: "number"
   BilOfMaterial Base:
@@ -5637,7 +5587,7 @@ definitions:
     - "accessories"
     properties:
       accessories:
-        type: "array"
+        type: array
         items: {}
   Equipment Base:
     type: "object"
@@ -5653,13 +5603,13 @@ definitions:
     - "number"
     properties:
       number:
-        type: "string"
+        type: string
       name:
-        type: "string"
+        type: string
       description:
-        type: "string"
+        type: string
       sraCode:
-        type: "string"
+        type: string
   Offer Base:
     type: "object"
     required:
@@ -5667,13 +5617,13 @@ definitions:
     - "name"
     properties:
       name:
-        type: "string"
+        type: string
       amount:
-        type: "string"
+        type: string
       price:
-        type: "string"
+        type: string
       unit:
-        type: "string"
+        type: string
   Offer Accessory:
     allOf:
     - $ref: "#/definitions/Offer Base"
@@ -5691,7 +5641,7 @@ definitions:
       discount:
         type: "number"
       price:
-        type: "string"
+        type: string
   Equipment Product:
     allOf:
     - $ref: "#/definitions/Equipment Base"
@@ -5709,9 +5659,9 @@ definitions:
     - "start"
     properties:
       start:
-        type: "string"
+        type: string
       finish:
-        type: "string"
+        type: string
     example:
       start: "start"
       finish: "finish"
@@ -5723,19 +5673,19 @@ definitions:
     - "value"
     properties:
       code:
-        type: "string"
+        type: string
       name:
-        type: "string"
+        type: string
       value:
         type: "number"
   Discounts Base:
     type: "object"
     properties:
       classes:
-        type: "array"
+        type: array
         items: {}
       categories:
-        type: "array"
+        type: array
         items: {}
     example:
       classes:
@@ -5750,40 +5700,40 @@ definitions:
     - "status"
     properties:
       status:
-        type: "string"
+        type: string
       message:
-        type: "string"
+        type: string
   Fare Base:
     type: "object"
     required:
     - "price"
     properties:
       price:
-        type: "string"
+        type: string
   Insurance Base:
     type: "object"
     properties:
       price:
-        type: "string"
+        type: string
   Estimate Assembly Base:
     type: "object"
     properties:
       id:
         type: "number"
       accessories:
-        type: "array"
+        type: array
         items: {}
   Estimate Assembly Items:
     type: "object"
     properties:
       items:
-        type: "array"
+        type: array
         items: {}
   Estimate Assemblies:
     type: "object"
     properties:
       assemblies:
-        type: "array"
+        type: array
         items: {}
     example:
       assemblies:
@@ -5793,15 +5743,15 @@ definitions:
     type: "object"
     properties:
       id:
-        type: "string"
+        type: string
       name:
-        type: "string"
+        type: string
       color:
-        type: "string"
+        type: string
       price:
-        type: "string"
+        type: string
       modified:
-        type: "string"
+        type: string
     example:
       color: "color"
       price: "price"
@@ -5814,7 +5764,7 @@ definitions:
     - type: "object"
       properties:
         assemblies:
-          type: "array"
+          type: array
           items: {}
   Estimate Characteristic Items:
     type: "object"
@@ -5822,13 +5772,13 @@ definitions:
     - "items"
     properties:
       items:
-        type: "array"
+        type: array
         items: {}
   Estimate Base Items:
     type: "object"
     properties:
       items:
-        type: "array"
+        type: array
         items: {}
   Template data structures:
     type: "object"
@@ -5836,16 +5786,16 @@ definitions:
     type: "object"
     properties:
       id:
-        type: "string"
+        type: string
       name:
-        type: "string"
+        type: string
       imageUrl:
-        type: "string"
+        type: string
   Templates list:
     type: "object"
     properties:
       items:
-        type: "array"
+        type: array
         items: {}
   Search data strcutures:
     type: "object"
@@ -5855,7 +5805,7 @@ definitions:
     - "items"
     properties:
       items:
-        type: "array"
+        type: array
         items: {}
   Search Result Item:
     type: "object"
@@ -5866,13 +5816,13 @@ definitions:
     - "type"
     properties:
       type:
-        type: "string"
+        type: string
       displayName:
-        type: "string"
+        type: string
       nextOffset:
         type: "number"
       results:
-        type: "array"
+        type: array
         items: {}
   Search Result Data:
     type: "object"
@@ -5881,9 +5831,9 @@ definitions:
     - "reference"
     properties:
       reference:
-        type: "string"
+        type: string
       displayText:
-        type: "string"
+        type: string
   Search Result Eqipment Data:
     allOf:
     - $ref: "#/definitions/Search Result Data"
@@ -5892,16 +5842,16 @@ definitions:
       - "reference"
       properties:
         reference:
-          type: "string"
+          type: string
         sraCode:
-          type: "string"
+          type: string
   Overview data structures:
     type: "object"
   Overview Response:
     type: "object"
     properties:
       items:
-        type: "array"
+        type: array
         items: {}
   Overview Company Summary:
     type: "object"
@@ -5912,9 +5862,9 @@ definitions:
       id:
         type: "number"
       name:
-        type: "string"
+        type: string
       projects:
-        type: "array"
+        type: array
         items: {}
   Overview Company Access Code:
     type: "object"
@@ -5922,7 +5872,7 @@ definitions:
     - "code"
     properties:
       code:
-        type: "string"
+        type: string
     example:
       code: "code"
   Access Granted Response:
@@ -5934,7 +5884,7 @@ definitions:
       id:
         type: "number"
       name:
-        type: "string"
+        type: string
   Project data structure:
     type: "object"
   Project:
@@ -5948,18 +5898,18 @@ definitions:
       id:
         type: "number"
       name:
-        type: "string"
+        type: string
       createdAt:
-        type: "string"
+        type: string
       totalCost:
         type: "number"
       color:
-        type: "string"
+        type: string
   Equipment Return Request:
     type: "object"
     properties:
       equipments:
-        type: "array"
+        type: array
         items: {}
     example:
       equipments:
@@ -5971,14 +5921,14 @@ definitions:
     - "address"
     properties:
       address:
-        type: "string"
+        type: string
   Pickup Contact:
     type: "object"
     required:
     - "number"
     properties:
       number:
-        type: "string"
+        type: string
   Company Rentals data structure:
     type: "object"
   Rental Cost:
@@ -5987,7 +5937,7 @@ definitions:
     - "price"
     properties:
       price:
-        type: "string"
+        type: string
       additional:
         type: "boolean"
   Rental Item:
@@ -5997,19 +5947,19 @@ definitions:
     - "uuid"
     properties:
       uuid:
-        type: "string"
+        type: string
       rentedAt:
-        type: "string"
+        type: string
   Rental Accessory Item:
     $ref: "#/definitions/Rental Item"
   Rentals:
     type: "object"
     properties:
       equipments:
-        type: "array"
+        type: array
         items: {}
       accessories:
-        type: "array"
+        type: array
         items: {}
   Company Returns data structure:
     type: "object"
@@ -6021,17 +5971,17 @@ definitions:
       - "returnedAt"
       properties:
         returnedAt:
-          type: "string"
+          type: string
   Return Accessory Item:
     $ref: "#/definitions/Return Item"
   Returns:
     type: "object"
     properties:
       equipments:
-        type: "array"
+        type: array
         items: {}
       accessories:
-        type: "array"
+        type: array
         items: {}
   Hyrse API data:
     type: "object"
@@ -6045,9 +5995,9 @@ definitions:
       id:
         type: "number"
       name:
-        type: "string"
+        type: string
       accessCode:
-        type: "string"
+        type: string
   Support data structures:
     type: "object"
   Error Base:
@@ -6058,11 +6008,11 @@ definitions:
     - "reason"
     properties:
       domain:
-        type: "string"
+        type: string
       reason:
-        type: "string"
+        type: string
       message:
-        type: "string"
+        type: string
   Error Detailed:
     type: "object"
     required:
@@ -6070,11 +6020,11 @@ definitions:
     - "message"
     properties:
       message:
-        type: "string"
+        type: string
       code:
         type: "number"
       errors:
-        type: "array"
+        type: array
         items: {}
   Not Found:
     type: "object"
@@ -6083,11 +6033,11 @@ definitions:
     - "message"
     properties:
       message:
-        type: "string"
+        type: string
       code:
         type: "number"
       errors:
-        type: "array"
+        type: array
         items: {}
   Not Allowed:
     type: "object"
@@ -6096,11 +6046,11 @@ definitions:
     - "message"
     properties:
       message:
-        type: "string"
+        type: string
       code:
         type: "number"
       errors:
-        type: "array"
+        type: array
         items: {}
   Action Accepted Reponse:
     type: "object"
@@ -6108,9 +6058,9 @@ definitions:
     - "message"
     properties:
       message:
-        type: "string"
+        type: string
       code:
-        type: "string"
+        type: string
   inline_response_200_android:
     required:
     - "latestVersion"
@@ -6125,7 +6075,7 @@ definitions:
         type: "number"
         description: "The latest version available to download"
       storeUrl:
-        type: "string"
+        type: string
         description: "The url pointing to the app in google play"
     description: "Version information for the Android app"
   inline_response_200_ios:
@@ -6135,14 +6085,14 @@ definitions:
     - "storeUrl"
     properties:
       minVersion:
-        type: "string"
+        type: string
         description: "The minimum version that can be run due to breaking changes\
           \ in apis or similar"
       latestVersion:
-        type: "string"
+        type: string
         description: "The latest version available to download"
       storeUrl:
-        type: "string"
+        type: string
         description: "The url pointing to the app in app store"
     description: "Version information for the iOS app"
   inline_response_200:
@@ -6160,13 +6110,13 @@ definitions:
     - "message"
     properties:
       message:
-        type: "string"
+        type: string
         description: "The meessage of Error."
       code:
-        type: "string"
+        type: string
         description: "The error code."
       errors:
-        type: "array"
+        type: array
         description: "Array of errors."
         items: {}
   inline_response_200_1_address_location:
@@ -6175,10 +6125,10 @@ definitions:
     - "longitude"
     properties:
       latitude:
-        type: "string"
+        type: string
         description: "The latitude of the Depot"
       longitude:
-        type: "string"
+        type: string
         description: "The longitude of the Depot"
     description: "The lat/long postition of the Depot"
   inline_response_200_1_address:
@@ -6191,19 +6141,19 @@ definitions:
     - "streetAddress"
     properties:
       streetAddress:
-        type: "string"
+        type: string
         description: "The street name of location."
       postalCode:
-        type: "string"
+        type: string
         description: "The postal Code of Location."
       city:
-        type: "string"
+        type: string
         description: "The city name of location."
       country:
-        type: "string"
+        type: string
         description: "The country name of location."
       region:
-        type: "string"
+        type: string
         description: "The region name of location."
       location:
         $ref: "#/definitions/inline_response_200_1_address_location"
@@ -6218,27 +6168,27 @@ definitions:
     - "phones"
     properties:
       code:
-        type: "string"
+        type: string
         description: "The Depot identifier"
       name:
-        type: "string"
+        type: string
         description: "The name of Depot"
       description:
-        type: "string"
+        type: string
         description: "The description of Depot."
       phones:
-        type: "array"
+        type: array
         items: {}
       email:
-        type: "string"
+        type: string
         description: "The contact mail of Depot."
       openingHours:
-        type: "array"
+        type: array
         items: {}
       address:
         $ref: "#/definitions/inline_response_200_1_address"
       departments:
-        type: "array"
+        type: array
         description: "The departments in Depot."
         items: {}
   inline_response_200_2:
@@ -6246,7 +6196,7 @@ definitions:
     - "items"
     properties:
       items:
-        type: "array"
+        type: array
         description: "List of items"
         items: {}
   inline_response_200_3_equipment_article:
@@ -6254,16 +6204,16 @@ definitions:
     - "number"
     properties:
       number:
-        type: "string"
+        type: string
         description: "Article unique number."
       name:
-        type: "string"
+        type: string
         description: "Article name long for 30 char."
       description:
-        type: "string"
+        type: string
         description: "Article description long for 255 char."
       sraCode:
-        type: "string"
+        type: string
         description: "Equipment identifier"
     description: "The Article data"
   inline_response_200_3_equipment_offer:
@@ -6272,16 +6222,16 @@ definitions:
     - "name"
     properties:
       name:
-        type: "string"
+        type: string
         description: "Define type on of (Rental,Usage,Purchase)"
       amount:
-        type: "string"
+        type: string
         description: "Proposed amount"
       price:
-        type: "string"
+        type: string
         description: "Unit price with cost type"
       unit:
-        type: "string"
+        type: string
         description: "Unit value"
     description: "The Offer data"
   inline_response_200_3_equipment_services:
@@ -6314,7 +6264,7 @@ definitions:
       equipment:
         $ref: "#/definitions/inline_response_200_3_equipment"
       accessories:
-        type: "array"
+        type: array
         description: "Accessories related to equipment."
         items: {}
   inline_response_200_4:
@@ -6322,12 +6272,12 @@ definitions:
     - "token"
     properties:
       token:
-        type: "string"
+        type: string
         description: "The unique device identification token"
   inline_response_200_5:
     properties:
       items:
-        type: "array"
+        type: array
         items: {}
   inline_response_403:
     required:
@@ -6335,13 +6285,13 @@ definitions:
     - "message"
     properties:
       message:
-        type: "string"
+        type: string
         description: "The meessage of Error."
       code:
         type: "number"
         description: "The error code."
       errors:
-        type: "array"
+        type: array
         description: "Array of errors."
         items: {}
   estimates_period:
@@ -6350,25 +6300,25 @@ definitions:
     - "start"
     properties:
       start:
-        type: "string"
+        type: string
         description: "ISO 8601 Inform about start date"
       finish:
-        type: "string"
+        type: string
         description: "ISO 8601 Inform about finish date"
     description: "The rental period"
   estimates_discounts:
     properties:
       classes:
-        type: "array"
+        type: array
         items: {}
       categories:
-        type: "array"
+        type: array
         items: {}
     description: "The rental active discounts"
   estimates_insurance:
     properties:
       price:
-        type: "string"
+        type: string
         description: "The price of insurance"
     description: "The insurance for this estimate, if it is absent it means the estimate\
       \ is not ensured"
@@ -6378,10 +6328,10 @@ definitions:
     - "longitude"
     properties:
       latitude:
-        type: "string"
+        type: string
         description: "The latitude of the Depot"
       longitude:
-        type: "string"
+        type: string
         description: "The longitude of the Depot"
     description: "The location for delivery"
   estimates_delivery_fare:
@@ -6389,7 +6339,7 @@ definitions:
     - "price"
     properties:
       price:
-        type: "string"
+        type: string
         description: "The productPrice of delivery"
     description: "The fare for delivery"
   estimates_delivery:
@@ -6401,34 +6351,34 @@ definitions:
       fare:
         $ref: "#/definitions/estimates_delivery_fare"
       status:
-        type: "string"
+        type: string
         description: "Status of Delivery One of (ROUTE_NOT_FOUND,DISTANCE_TO_BIG,,DISTANCE_TO_SMALL,WEIGHT_TO_BIG,WEIGHT_NOT_FOUND,ZONE_NOT_SUPPORTED)"
       message:
-        type: "string"
+        type: string
         description: "description"
     description: "The delivery for this estimate"
   body:
     type: "object"
     properties:
       id:
-        type: "string"
+        type: string
         description: "The unique identifier"
       name:
-        type: "string"
+        type: string
         description: "The name of estimate"
       color:
-        type: "string"
+        type: string
         description: "The color of the estimate"
       price:
-        type: "string"
+        type: string
         description: "The total productPrice"
       modified:
-        type: "string"
+        type: string
         description: "ISO 8601 The last modified date"
       period:
         $ref: "#/definitions/estimates_period"
       assemblies:
-        type: "array"
+        type: array
         items: {}
         description: "The rental items"
       discounts:
@@ -6523,33 +6473,33 @@ definitions:
   inline_response_200_6_discounts:
     properties:
       classes:
-        type: "array"
+        type: array
         items: {}
       categories:
-        type: "array"
+        type: array
         items: {}
     description: "The rental active discounts"
   inline_response_200_6:
     properties:
       id:
-        type: "string"
+        type: string
         description: "The unique identifier"
       name:
-        type: "string"
+        type: string
         description: "The name of estimate"
       color:
-        type: "string"
+        type: string
         description: "The color of the estimate"
       price:
-        type: "string"
+        type: string
         description: "The total productPrice"
       modified:
-        type: "string"
+        type: string
         description: "ISO 8601 The last modified date"
       period:
         $ref: "#/definitions/estimates_period"
       assemblies:
-        type: "array"
+        type: array
         description: "The rental items"
         items: {}
       discounts:
@@ -6561,19 +6511,19 @@ definitions:
   inline_response_200_7:
     properties:
       id:
-        type: "string"
+        type: string
         description: "The unique identifier"
       name:
-        type: "string"
+        type: string
         description: "The name of estimate"
       color:
-        type: "string"
+        type: string
         description: "The color of the estimate"
       price:
-        type: "string"
+        type: string
         description: "The total productPrice"
       modified:
-        type: "string"
+        type: string
         description: "ISO 8601 The last modified date"
   inline_response_200_8_equipment_order:
     required:
@@ -6586,7 +6536,7 @@ definitions:
         type: "number"
         description: "The percent of discount if avaiable."
       price:
-        type: "string"
+        type: string
         description: "The cost"
     description: "Define that item should be orderable."
   inline_response_200_8_equipment:
@@ -6610,7 +6560,7 @@ definitions:
       equipment:
         $ref: "#/definitions/inline_response_200_8_equipment"
       accessories:
-        type: "array"
+        type: array
         description: "The accessories in this estimate"
         items: {}
   inline_response_200_9:
@@ -6618,7 +6568,7 @@ definitions:
     - "items"
     properties:
       items:
-        type: "array"
+        type: array
         description: "The different search result sections, Equipment, Depot etc"
         items: {}
   inline_response_201:
@@ -6630,5 +6580,5 @@ definitions:
         type: "number"
         description: "The resrouce ID"
       name:
-        type: "string"
+        type: string
         description: "The item display name."
