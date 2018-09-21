@@ -61,3 +61,8 @@ paths:
                 description: Extra important comment
               email:
                 type: string
+          examples:
+            application/json:
+              items:
+              - name: Jesper Blåbärsöl
+                email: jesper@kalle.com
