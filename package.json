@@ -12,9 +12,10 @@
   "license": "Unlicense",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
     "connect": "^3.6.6",
     "js-yaml": "^3.12.0",
-    "morgan": "^1.9.1",
+    "lodash": "^4.17.11",
     "swagger-tools": "^0.10.4"
   }
 }

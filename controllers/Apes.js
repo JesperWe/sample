@@ -2,7 +2,7 @@
 
 const _ = require( 'lodash' )
 const utils = require( '../utils/writer.js' )
-const Apes = require( '../service/ApesService' )
+const ApesResolver = require( '../resolvers/ApesResolver' )
 
 module.exports.get = ( req, res, next ) => {
 
@@ -11,11 +11,13 @@ module.exports.get = ( req, res, next ) => {
         return
     }
 
-    Apes.get()
+    let email = _.get( req, 'swagger.params.email.value' )
+
+    ApesResolver.get( email )
         .then( response => {
-            utils.writeJson( res, response )
+            utils.writeJson( res, response.data )
         } )
-        .catch( response => {
-            utils.writeJson( res, response )
+        .catch( error => {
+            utils.writeJson( res, error.message )
         } )
 }
