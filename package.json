@@ -1,7 +1,7 @@
 {
-  "name": "hyreslandslaget-hll-api",
+  "name": "SampleAPI",
   "version": "2.0.0",
-  "description": "This is the HLL App API",
+  "description": "This is an API Sample",
   "main": "index.js",
   "scripts": {
     "prestart": "npm install",

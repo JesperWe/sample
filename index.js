@@ -6,6 +6,7 @@ const fs = require( 'fs' ),
     morgan = require( 'morgan' )
 
 const app = require( 'connect' )()
+
 const swaggerTools = require( 'swagger-tools' )
 const jsyaml = require( 'js-yaml' )
 const host = '0.0.0.0'
@@ -15,7 +16,7 @@ const port = 80
 const options = {
     swaggerUi: path.join( __dirname, '/swagger.json' ),
     controllers: path.join( __dirname, './controllers' ),
-    useStubs: process.env.NODE_ENV === 'development' // Conditionally turn on stubs (mock mode)
+    useStubs: true //process.env.NODE_ENV === 'development' // Conditionally turn on stubs (mock mode)
 }
 
 app.use( morgan( 'combined' ) )

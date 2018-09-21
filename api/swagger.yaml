@@ -6,6 +6,7 @@ info:
   title: "Hyreslandslaget - HLL API"
 host: "api.hyreslandslaget.se"
 basePath: "/_ah/api/hll/v1/"
+
 tags:
 - name: "Administration"
   description: "App admin"
@@ -18,10 +19,14 @@ tags:
     \ them client must first register his using identfication API."
 - name: "Search"
   description: "The Search is used for finding content from HLL."
+- name: Catalog
+  description: Rental products catalog
 - name: "Overview"
 - name: "Project"
+
 schemes:
 - "https"
+
 paths:
   /update:
     get:
@@ -308,7 +313,7 @@ paths:
   /catalogue/groups:
     get:
       tags:
-      - Depots
+      - Catalog
       summary: Load All Groups
       operationId: catalogGroupsGET
       produces:
@@ -350,10 +355,10 @@ paths:
   /catalogue/groups/{code}:
     get:
       tags:
-      - Depots
-      summary: "Load Group"
+      - Catalog
+      summary: "Second level catalog hierarchy"
       description: ""
-      operationId: "catalogueGroupsCodeGET"
+      operationId: "catalogGroupsCodeGET"
       produces:
       - "application/json"
       parameters:
@@ -369,9 +374,14 @@ paths:
           examples:
             application/json:
               items:
-              - code: "1"
-                name: "Heavy machinery"
-          headers: {}
+              - code: '12'
+                name: Dumprar
+              - code: '15'
+                name: Truckar
+              - code: '16'
+                name: Kärror och vagnar
+              - code: '17'
+                name: Fyrhjulingar
           schema:
             type: "object"
             required:
@@ -381,14 +391,13 @@ paths:
                 type: array
                 description: "List of items"
                 items: {}
-      x-swagger-router-controller: "Administration"
+      x-swagger-router-controller: "Catalog"
   /catalogue/products:
     get:
       tags:
       - "Administration"
-      summary: "List catalogue assemblies for category"
-      description: ""
-      operationId: "catalogueProductsGET"
+      summary: "List catalog assemblies for category"
+      operationId: catalogProductsGET
       produces:
       - "application/json"
       parameters:
@@ -406,49 +415,28 @@ paths:
               items:
               - equipment:
                   article:
-                    number: "1234567890"
-                    name: "The Dumper"
-                    description: "Lorem imposum"
-                    sraCode: "211313"
+                    number: '124235'
+                    name: Banddumper <1 ton diesel
+                    description: Banddumper, självlastande < 1 ton
+                    sraCode: '124235'
                   offer:
-                    name: "\"Hyra\""
-                    amount: "123.45"
-                    price: "12345 kr / alldager"
-                    unit: "st"
-                  services:
-                    article:
-                      number: "1234567890"
-                      name: "The Dumper"
-                      description: "Lorem imposum"
-                      sraCode: "211313"
-                    offer:
-                      name: "\"Hyra\""
-                      amount: "123.45"
-                      price: "12345 kr / alldager"
-                      unit: "st"
+                    unit: st
+                    amount: '1.00'
+                    preSelected: false
+                    name: Hyra
+                    price: 1 520 kr / byggdag
                 accessories:
                 - article:
-                    number: "1234567890"
-                    name: "The Dumper"
-                    description: "Lorem imposum"
-                    sraCode: "211313"
+                    number: '05030400'
+                    name: Diesel
+                    description: Diesel
+                    sraCode: ''
                   offer:
-                    name: "\"Hyra\""
-                    amount: "123.45"
-                    price: "12345 kr / alldager"
-                    unit: "st"
-                    preSelected: true
-                  services:
-                    article:
-                      number: "1234567890"
-                      name: "The Dumper"
-                      description: "Lorem imposum"
-                      sraCode: "211313"
-                    offer:
-                      name: "\"Hyra\""
-                      amount: "123.45"
-                      price: "12345 kr / alldager"
-                      unit: "st"
+                    unit: lit
+                    amount: '1.00'
+                    preSelected: false
+                    name: Köp
+                    price: 17 kr / engångskostnad
           headers: {}
           schema:
             type: "object"
@@ -459,14 +447,14 @@ paths:
                 type: array
                 description: "List of items"
                 items: {}
-      x-swagger-router-controller: "Administration"
+      x-swagger-router-controller: Catalog
   /catalogue/products/{number}:
     get:
       tags:
       - "Administration"
       summary: "Get catalogue assembly"
       description: "Allow user to browse products data"
-      operationId: "catalogueProductsNumberGET"
+      operationId: catalogProductsNumberGET
       produces:
       - "application/json"
       parameters:
@@ -524,7 +512,6 @@ paths:
                     amount: "123.45"
                     price: "12345 kr / alldager"
                     unit: "st"
-          headers: {}
           schema:
             type: "object"
             required:
@@ -537,7 +524,7 @@ paths:
                 type: array
                 description: "Accessories related to equipment."
                 items: {}
-      x-swagger-router-controller: "Administration"
+      x-swagger-router-controller: Catalog
   /identity:
     get:
       tags:

@@ -1,11 +1,25 @@
 'use strict'
 
-exports.catalogGroupsGET = ( examples ) => {
+exports.catalogGroupsGET = () => {
     return new Promise( ( resolve, reject ) => {
-        if( Object.keys( examples ).length > 0 ) {
-            resolve( examples[ Object.keys( examples )[ 0 ] ] )
-        } else {
-            resolve()
-        }
+        resolve()
+    } )
+}
+
+exports.catalogGroupsCodeGET = () => {
+    return new Promise( ( resolve, reject ) => {
+        resolve()
+    } )
+}
+
+exports.catalogProductsGET = () => {
+    return new Promise( ( resolve, reject ) => {
+        resolve()
+    } )
+}
+
+exports.catalogProductsNumberGET = () => {
+    return new Promise( ( resolve, reject ) => {
+        resolve()
     } )
 }
