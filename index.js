@@ -9,15 +9,9 @@ const app = require( 'connect' )()
 
 const swaggerTools = require( 'swagger-tools' )
 const jsyaml = require( 'js-yaml' )
+
 const host = '0.0.0.0'
 const port = 80
-
-// swaggerRouter configuration
-const options = {
-    swaggerUi: path.join( __dirname, '/swagger.json' ),
-    controllers: path.join( __dirname, './controllers' ),
-    useStubs: true //process.env.NODE_ENV === 'development' // Conditionally turn on stubs (mock mode)
-}
 
 app.use( morgan( 'combined' ) )
 
@@ -28,7 +22,12 @@ swaggerTools.initializeMiddleware( swaggerDoc, ( middleware ) => {
 
     app.use( middleware.swaggerMetadata() )
     app.use( middleware.swaggerValidator() )
-    app.use( middleware.swaggerRouter( options ) )
+
+    app.use( middleware.swaggerRouter( {
+        controllers: path.join( __dirname, './controllers' ),
+        useStubs: process.env.NODE_ENV === 'development' // Conditionally turn on stubs (mock mode)
+    } ) )
+
     app.use( middleware.swaggerUi() )
 
     http.createServer( app ).listen( { port, host }, () => {
