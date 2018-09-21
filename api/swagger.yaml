@@ -34,9 +34,8 @@ paths:
                   type: string
           examples:
             application/json:
-              items:
-              - name: Jesper Blåbärsöl
-                email: jesper@kalle.com
+            - name: Jesper Blåbärsöl
+              email: jesper@kalle.com
                 
   /apes/{email}:
     get: 
