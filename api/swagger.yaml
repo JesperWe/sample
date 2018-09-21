@@ -16,6 +16,7 @@ paths:
       - Company
       summary: Find all apes in the company
       description: More detail here.
+      x-swagger-router-controller: Apes
       produces: 
       - application/json
       responses:
@@ -42,6 +43,7 @@ paths:
       tags:
       - Company
       description: Get a specific ape by email
+      x-swagger-router-controller: Apes
       parameters:
       - in: path
         name: email

@@ -4,7 +4,6 @@
   "description": "This is an API Sample",
   "main": "index.js",
   "scripts": {
-    "prestart": "npm install",
     "start": "node index.js"
   },
   "keywords": [
